@@ -18,6 +18,8 @@ class Application:
             self.wd = webdriver.Ie()
         else:
             raise ValueError("Unrecognized browser %s" % browser)
+        self.config = config
+        self.base_url = config["web"]["baseUrl"]
         self.wd.implicitly_wait(10)
         self.session = SessionHelper(self)
         self.project = ProjectHelper(self)
@@ -25,8 +27,6 @@ class Application:
         self.signup = SignupHelper(self)
         self.mail = MailHelper(self)
         self.soap = SoapHelper(self)
-        self.config = config
-        self.base_url = config["web"]["baseUrl"]
 
     def is_valid(self):
         try:
